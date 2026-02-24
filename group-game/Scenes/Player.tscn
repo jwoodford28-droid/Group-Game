@@ -6,11 +6,84 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 52.03845
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpqav"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"DownLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"DownRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"Right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"Up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"UpLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kyqiw")
+}],
+"loop": true,
+"name": &"UpRight",
+"speed": 5.0
+}]
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=545131653]
 script = ExtResource("1_rpqav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149845236]
 shape = SubResource("CircleShape2D_kpjcp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1798308859]
-texture = ExtResource("2_kyqiw")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1902985526]
+sprite_frames = SubResource("SpriteFrames_rpqav")
+animation = &"Down"
+
+[node name="Dodge_Timer" type="Timer" parent="." unique_id=2078185050]
+wait_time = 0.3
+
+[connection signal="timeout" from="Dodge_Timer" to="." method="_on_dodge_timer_timeout"]

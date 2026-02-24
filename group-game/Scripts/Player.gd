@@ -1,12 +1,56 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+var SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const accel = 100
+var dodge = false
 
 
 func _physics_process(delta: float) -> void:
-	var move_vector: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = velocity.move_toward(move_vector * SPEED, accel)
+	if Input.is_action_just_pressed("Dodge") and dodge == false:
+		dodge = true
+		$Dodge_Timer.start()
+		$CollisionShape2D.disabled = true
+		if $AnimatedSprite2D.animation == "Up":
+			velocity = Vector2(0, -1000)
+		elif $AnimatedSprite2D.animation == "UpLeft":
+			velocity = Vector2(-707, -707)
+		elif $AnimatedSprite2D.animation == "UpRight":
+			velocity = Vector2(707, -707)
+		elif $AnimatedSprite2D.animation == "Down":
+			velocity = Vector2(0, 1000)
+		elif $AnimatedSprite2D.animation == "DownLeft":
+			velocity = Vector2(-707, 707)
+		elif $AnimatedSprite2D.animation == "DownRight":
+			velocity = Vector2(707, 707)
+		elif $AnimatedSprite2D.animation == "Left":
+			velocity = Vector2(-1000, 0)
+		elif $AnimatedSprite2D.animation == "Right":
+			velocity = Vector2(1000, 0)
+	if dodge == false:
+		var move_vector: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
+		velocity = velocity.move_toward(move_vector * SPEED, accel)
+		if velocity.y < 0 and velocity.x == 0:
+			$AnimatedSprite2D.play("Up")
+		elif velocity.y < 0 and velocity.x < 0:
+			$AnimatedSprite2D.play("UpLeft")
+		elif velocity.y < 0 and velocity.x > 0:
+			$AnimatedSprite2D.play("UpRight")
+		elif velocity.y > 0 and velocity.x == 0:
+			$AnimatedSprite2D.play("Down")
+		elif velocity.y > 0 and velocity.x < 0:
+			$AnimatedSprite2D.play("DownLeft")
+		elif velocity.y > 0 and velocity.x > 0:
+			$AnimatedSprite2D.play("DownRight")
+		elif velocity.y == 0 and velocity.x < 0:
+			$AnimatedSprite2D.play("Left")
+		elif velocity.y == 0 and velocity.x > 0:
+			$AnimatedSprite2D.play("Right")
+		else:
+			$AnimatedSprite2D.stop()
+		print($AnimatedSprite2D.animation)
 	move_and_slide()
+
+func _on_dodge_timer_timeout() -> void:
+	dodge = false
