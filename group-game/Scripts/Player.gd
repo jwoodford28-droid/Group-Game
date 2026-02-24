@@ -1,16 +1,21 @@
 extends CharacterBody2D
 
 
-var SPEED = 300.0
+var SPEED = 350.0
 const JUMP_VELOCITY = -400.0
 const accel = 100
 var dodge = false
+var dodge_cooldown = false
+var interactable_trigger = false
+var interactable = NAN
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Dodge") and dodge == false:
+	if Input.is_action_just_pressed("Dodge") and dodge_cooldown == false:
 		dodge = true
+		dodge_cooldown = true
 		$Dodge_Timer.start()
+		$Dodge_Cooldown.start()
 		$CollisionShape2D.disabled = true
 		if $AnimatedSprite2D.animation == "Up":
 			velocity = Vector2(0, -1000)
@@ -54,3 +59,17 @@ func _physics_process(delta: float) -> void:
 
 func _on_dodge_timer_timeout() -> void:
 	dodge = false
+
+
+func _on_dodge_cooldown_timeout() -> void:
+	dodge_cooldown = false
+
+
+func _on_interaction_range_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Interactable"):
+		interactable_trigger = true
+	
+
+
+func _on_interaction_range_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.
