@@ -52,8 +52,23 @@ func _physics_process(delta: float) -> void:
 			$AnimatedSprite2D.play("Left")
 		elif velocity.y == 0 and velocity.x > 0:
 			$AnimatedSprite2D.play("Right")
-		else:
-			$AnimatedSprite2D.stop()
+		elif $AnimatedSprite2D.animation == "Up":
+			$AnimatedSprite2D.play("Up_Idle")
+		elif $AnimatedSprite2D.animation == "UpLeft":
+			$AnimatedSprite2D.play("UpLeft_Idle")
+		elif $AnimatedSprite2D.animation == "UpRight":
+			$AnimatedSprite2D.play("UpRight_Idle")
+		elif $AnimatedSprite2D.animation == "Down":
+			$AnimatedSprite2D.play("Down_Idle")
+		elif $AnimatedSprite2D.animation == "DownLeft":
+			$AnimatedSprite2D.play("DownLeft_Idle")
+		elif $AnimatedSprite2D.animation == "DownRight":
+			$AnimatedSprite2D.play("DownRight_Idle")
+		elif $AnimatedSprite2D.animation == "Left":
+			$AnimatedSprite2D.play("Left_Idle")
+		elif $AnimatedSprite2D.animation == "Right":
+			$AnimatedSprite2D.play("Right_Idle")
+			
 		print($AnimatedSprite2D.animation)
 	move_and_slide()
 
