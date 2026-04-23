@@ -30,7 +30,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and interactable_trigger == true:
 		if $Control.visible == true:
-			$Control.visible == false
+			$Control.visible = false
 		elif interactable.type == "text":
 			$Control.visible = true
 			$Control/Label.text = interactable.text
