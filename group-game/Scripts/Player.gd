@@ -29,11 +29,12 @@ func _ready() -> void:
 	$Sword_Attack/Hitbox.disabled = true
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and interactable_trigger == true:
-		if $Control.visible == true:
-			$Control.visible = false
-		elif interactable.type == "text":
-			$Control.visible = true
-			$Control/Label.text = interactable.text
+		if interactable.type == "text":
+			if $Text.visible == true:
+				$Text.visible = false
+			else:
+				$Text.visible = true
+				$Text/Label.text = interactable.text
 
 	if Input.is_action_just_pressed("Dodge") and dodge_cooldown == false and attacking == false:
 		Dodge()
@@ -268,8 +269,11 @@ func _on_interaction_range_area_shape_entered(area_rid: RID, area: Area2D, area_
 	if area.is_in_group("Interactable"):
 		interactable_trigger = true
 		interactable = area
+		$TutorialText.visible = true
 		print(interactable)
 
 func _on_interaction_range_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Interactable"):
 		interactable_trigger = false
+		$TutorialText.visible = false
+		$Text.visible = false
