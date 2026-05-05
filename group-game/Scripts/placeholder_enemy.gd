@@ -13,8 +13,7 @@ var knockback_taken: float
 var knockback_resistance: float
 var player_position: Vector2
 var accel: float = 10
-var heart_chance
-var arrow_chance
+
 func _ready() -> void:
 	speed = attributes.speed
 	damage = attributes.damage
@@ -23,8 +22,7 @@ func _ready() -> void:
 	knockback = attributes.knockback
 	knockback_resistance = attributes.knockback_resistance
 	sprite.sprite_frames = attributes.texture
-	heart_chance = attributes.heart_chance
-	arrow_chance = attributes.arrow_chance
+
 func _physics_process(_delta: float) -> void:
 	if target:
 		chase_target()
@@ -38,6 +36,7 @@ func _physics_process(_delta: float) -> void:
 		
 		velocity = (global_position - player_position) * knockback_taken
 		knockback_taken =0
+	velocity = velocity * 0.95
 	move_and_slide()
 func chase_target():
 	var distance_to_player: Vector2
@@ -61,6 +60,7 @@ func _process(_delta: float) -> void:
 	if health > max_health:
 		health = max_health
 	health_bar.max_value = max_health
+	health_bar.min_value = max_health * -0.3
 	health_bar.value = health - float(max_health)/10
 func update_health_bar(current_hp, max_hp):
 	var health_pct = float(current_hp) / max_hp
@@ -75,21 +75,7 @@ func update_health_bar(current_hp, max_hp):
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player") == true:
-		health -= area.damage
-		#print("ow")
-		knockback_taken = area.knockback
-		knockback_taken -= (knockback_taken*knockback_resistance)/100
-		player_position = area.global_position
-		area.playsound(preload("res://Sounds/Sword Hit Flesh.mp3.mp3"))
-		if health <= 0:
-			var spawn_resource: consumable_resource = preload("res://Resources/Heart.tres")
-			var new_instance = Heart_SCENE.instantiate()
-			new_instance.Attributes = spawn_resource #this part is where im having trouble
-			new_instance.global_position = global_position
-			get_parent().add_child(new_instance)
-			area.playsound(preload("res://Sounds/universfield-slime-impact-352473.mp3"))
-			queue_free()
-			
+		_damage(area)
 func _damage(body: Node2D):
 	health -= body.damage
 	#print("ow")
@@ -97,10 +83,10 @@ func _damage(body: Node2D):
 	knockback_taken -= (knockback_taken*knockback_resistance)/100
 	player_position = body.global_position
 	var player = get_tree().get_first_node_in_group("Player")
-	if player.is_in_group("Player"):
+	if player:
 		player.playsound(preload("res://Sounds/Sword Hit Flesh.mp3.mp3"))
 	if health <= 0:
-		if randi_range(1,10) < heart_chance:
+		if randi_range(1,10) < 5:
 			var spawn_resource: consumable_resource = preload("res://Resources/Heart.tres")
 			var new_instance = Heart_SCENE.instantiate()
 			new_instance.Attributes = spawn_resource #this part is where im having trouble

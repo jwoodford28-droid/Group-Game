@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnjkjaf8ibera"
-path="res://.godot/imported/Arrow Item Spritesheet.png-6def3607687ac4be7486e8f8a048969b.ctex"
+uid="uid://dokcvwtp1dnuw"
+path="res://.godot/imported/Fireball (1).png-2883dcd1b72d16e25b300f221f4df5be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Arrow Item Spritesheet.png"
-dest_files=["res://.godot/imported/Arrow Item Spritesheet.png-6def3607687ac4be7486e8f8a048969b.ctex"]
+source_file="res://Fireball (1).png"
+dest_files=["res://.godot/imported/Fireball (1).png-2883dcd1b72d16e25b300f221f4df5be.ctex"]
 
 [params]
 
