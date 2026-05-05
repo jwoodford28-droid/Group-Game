@@ -9,7 +9,11 @@ func shoot(dir: Vector2):
 	fireball.direction = dir
 	get_tree().root.add_child(fireball)
 func summon_enemy(position):
+<<<<<<< Updated upstream
 	
+=======
+	pass
+>>>>>>> Stashed changes
 
 
 func _on_fireball_timer_timeout() -> void:
