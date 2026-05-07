@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dokcvwtp1dnuw"
-path="res://.godot/imported/Fireball (1).png-2883dcd1b72d16e25b300f221f4df5be.ctex"
+uid="uid://djq8ib3wbat7p"
+path="res://.godot/imported/Bow Down.png-890c54131f4f3100d0161d4c1c80b18a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fireball (1).png"
-dest_files=["res://.godot/imported/Fireball (1).png-2883dcd1b72d16e25b300f221f4df5be.ctex"]
+source_file="res://Sprites/Bow Down.png"
+dest_files=["res://.godot/imported/Bow Down.png-890c54131f4f3100d0161d4c1c80b18a.ctex"]
 
 [params]
 

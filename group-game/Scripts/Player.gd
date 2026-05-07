@@ -21,6 +21,8 @@ var direction: int = 0
 var attacking = false
 var stagger = false
 var push_strength: float = 50
+@export var arrows: int
+var push_strength: float = 100
 @export var sword_swish_sfx: AudioStream = preload("res://Sounds/Knife Swish.mp3.mp3")
 @export var sword_hit_flesh_sfx: AudioStream = preload("res://Sounds/Sword Hit Flesh.mp3.mp3")
 @export var example_sound: AudioStream = preload("res://Sounds/alex_jauk-slap-237622.mp3")
@@ -31,6 +33,7 @@ var Arrow_SCENE: PackedScene = preload("res://Scenes/arrow_projectile.tscn")
 func _ready() -> void:
 	attacking = false
 	$Sword_Attack/Hitbox.disabled = true
+	$Sword_Attack/BowSprite.visible = false
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Dodge") and dodge_cooldown == false and attacking == false:
 		Dodge()
@@ -109,7 +112,9 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Attack") and attacking == false and stagger == false and dodge == false:
 		Attack()
 	if Input.is_action_just_pressed("Shoot bow") and attacking == false and stagger == false and dodge == false:
-		shoot_bow()
+		if arrows > 0:
+			shoot_bow()
+			arrows -=1
 	move_and_slide()
 	push_blocks()
 func shoot_bow():
@@ -119,10 +124,12 @@ func shoot_bow():
 	velocity = Vector2(0,0)
 	emit_signal("attack")
 	if $AnimatedSprite2D.animation == "Up" or $AnimatedSprite2D.animation == "Up_Idle":
+		$Sword_Attack/BowSprite.z_index = z_index -2
+		$AnimationPlayer.play("Bow_Up")
 		var spawn_resource: arrow_resource = preload("res://Resources/example_arrow_resource.tres")
 		spawn_resource.direction = 2
 		spawn_resource.damage = arrow_damage
-		spawn_resource.knockback = arrow_knockback
+		spawn_resource.knockback = float(arrow_knockback)
 		spawn_resource.target = str("Enemy")
 		spawn_resource.speed = 20
 		var new_instance = Arrow_SCENE.instantiate()
@@ -131,10 +138,12 @@ func shoot_bow():
 		get_parent().add_child(new_instance)
 		$AnimatedSprite2D.play("Attack_Up")
 	elif $AnimatedSprite2D.animation == "Down" or $AnimatedSprite2D.animation == "Down_Idle":
+		$Sword_Attack/BowSprite.z_index = z_index
+		$AnimationPlayer.play("Bow_Down")
 		var spawn_resource: arrow_resource = preload("res://Resources/example_arrow_resource.tres")
 		spawn_resource.direction = 4
 		spawn_resource.damage = arrow_damage
-		spawn_resource.knockback = arrow_knockback
+		spawn_resource.knockback = float(arrow_knockback)
 		spawn_resource.target = str("Enemy")
 		spawn_resource.speed = arrow_speed
 		var new_instance = Arrow_SCENE.instantiate()
@@ -143,10 +152,12 @@ func shoot_bow():
 		get_parent().add_child(new_instance)
 		$AnimatedSprite2D.play("Attack_Down")
 	elif $AnimatedSprite2D.animation == "Left" or $AnimatedSprite2D.animation == "Left_Idle":
+		$Sword_Attack/BowSprite.z_index = z_index
+		$AnimationPlayer.play("Bow_Left")
 		var spawn_resource: arrow_resource = preload("res://Resources/example_arrow_resource.tres")
 		spawn_resource.direction = 3
 		spawn_resource.damage = arrow_damage
-		spawn_resource.knockback = arrow_knockback
+		spawn_resource.knockback = float(arrow_knockback)
 		spawn_resource.target = str("Enemy")
 		spawn_resource.speed = arrow_speed
 		$AnimatedSprite2D.play("Attack_Left")
@@ -155,10 +166,12 @@ func shoot_bow():
 		new_instance.global_position = global_position
 		get_parent().add_child(new_instance)
 	elif $AnimatedSprite2D.animation == "Right" or $AnimatedSprite2D.animation == "Right_Idle":
+		$Sword_Attack/BowSprite.z_index = z_index
+		$AnimationPlayer.play("Bow_Right")
 		var spawn_resource: arrow_resource = preload("res://Resources/example_arrow_resource.tres")
 		spawn_resource.direction = 1
 		spawn_resource.damage = arrow_damage
-		spawn_resource.knockback = arrow_knockback
+		spawn_resource.knockback = float(arrow_knockback)
 		spawn_resource.target = str("Enemy")
 		spawn_resource.speed = arrow_speed
 		var new_instance = Arrow_SCENE.instantiate()
@@ -197,6 +210,7 @@ func Attack():
 		$Sword_Attack/AnimatedSprite2D.visible = true
 
 func _process(_delta: float) -> void:
+	$Control/Label.text = str(arrows)
 	var bodies = $Hurtbox.get_overlapping_bodies()
 	for body in bodies:
 		#print("hit!")
@@ -213,6 +227,7 @@ func _process(_delta: float) -> void:
 	mana_bar.max_value = 100
 	mana_bar.value = float(mana) / max_mana * 100
 	update_mana_bar(mana,max_mana)
+	$Control/Label.text = str(arrows)
 
 
 
