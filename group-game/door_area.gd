@@ -9,7 +9,7 @@ func _on_puzzle_button_pressed():
 	if buttons_pressed >= button_presses_needed:
 		visible = false
 		$CollisionShape2D.set_deferred("disabled", true)
-		
+		print("door open")
 		
 		
 		
@@ -18,3 +18,4 @@ func _on_puzzle_button_unpressed():
 	if buttons_pressed < button_presses_needed:
 		visible = true
 		$CollisionShape2D.set_deferred("disabled", false)
+		

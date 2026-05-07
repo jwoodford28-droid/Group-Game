@@ -767,5 +767,3 @@ attributes = SubResource("Resource_x6hpk")
 [node name="Block" parent="." unique_id=849349803 instance=ExtResource("11_ak604")]
 z_index = 2
 position = Vector2(144, 45)
-collision_layer = 32
-collision_mask = 9
