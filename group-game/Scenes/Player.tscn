@@ -1126,7 +1126,7 @@ wait_time = 0.7
 [node name="Invincibility_Timer" type="Timer" parent="." unique_id=1818204699]
 one_shot = true
 
-[node name="Interaction_Range" type="Area2D" parent="." unique_id=1513192852]
+[node name="Interaction_Range" type="Area2D" parent="." unique_id=1513192852 groups=["Player"]]
 collision_layer = 64
 collision_mask = 64
 
@@ -1164,7 +1164,7 @@ position = Vector2(0, -28)
 scale = Vector2(2.084171, 2.084171)
 texture = ExtResource("5_ulo2v")
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1993944495]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1993944495 groups=["Player"]]
 position = Vector2(0, 10)
 collision_mask = 2
 
@@ -1172,7 +1172,7 @@ collision_mask = 2
 unique_name_in_owner = true
 shape = SubResource("CapsuleShape2D_gntrk")
 
-[node name="Detection_Range" type="Area2D" parent="." unique_id=2071541933]
+[node name="Detection_Range" type="Area2D" parent="." unique_id=2071541933 groups=["Player"]]
 collision_mask = 2
 
 [node name="Detection box" type="CollisionShape2D" parent="Detection_Range" unique_id=399850425]
