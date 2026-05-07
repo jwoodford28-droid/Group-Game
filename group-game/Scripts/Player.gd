@@ -38,6 +38,8 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("Dodge") and dodge_cooldown == false and attacking == false:
 		Dodge()
+	if Input.is_action_just_pressed("Interact") and interactable_trigger == true:
+		print(interactable)
 	if dodge == false and attacking == false:
 		var move_vector: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
 		velocity = velocity.move_toward(move_vector * SPEED, accel)
@@ -205,6 +207,14 @@ func _on_dodge_timer_timeout() -> void:
 func _on_dodge_cooldown_timeout() -> void:
 	dodge_cooldown = false
 	%Hurtbox.disabled = false
+
+
+func _on_interaction_range_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Interactable"):
+		interactable_trigger = true
+		body = interactable
+	
+
 
 @warning_ignore("unused_parameter")
 

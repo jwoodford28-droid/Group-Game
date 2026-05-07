@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dlr2qjimwq6kn" path="res://Tunnel.tscn" id="11_0k7nw"]
 [ext_resource type="PackedScene" uid="uid://dl2gjoown3w1w" path="res://Scenes/pause_menu.tscn" id="11_np8lt"]
 [ext_resource type="PackedScene" uid="uid://b0uvv2qcda44i" path="res://Scenes/Interactable.tscn" id="12_np8lt"]
+[ext_resource type="Texture2D" uid="uid://dk06gkm0u12gi" path="res://Sprites/unnamed.png" id="4_6bry8"]
+[ext_resource type="Script" uid="uid://dihiis82th61x" path="res://Scripts/pause_menu.gd" id="5_7h23t"]
+[ext_resource type="PackedScene" uid="uid://dl2gjoown3w1w" path="res://Scenes/pause_menu.tscn" id="7_1l8qe"]
+[ext_resource type="PackedScene" uid="uid://b0uvv2qcda44i" path="res://Scenes/Interactable.tscn" id="9_06phl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yw3w"]
 texture = ExtResource("1_7fr83")

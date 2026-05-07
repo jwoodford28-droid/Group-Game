@@ -12,6 +12,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if interact_type == 1:
-		$Sprite2D.texture = paper_sprite
+		pass
 	if interact_type == 2:
 		pass
