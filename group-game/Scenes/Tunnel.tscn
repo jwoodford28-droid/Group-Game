@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dlr2qjimwq6kn"]
 
-[ext_resource type="Script" uid="uid://c61ghmxel73o6" path="res://tunnel.gd" id="1_4k2ek"]
+[ext_resource type="Script" uid="uid://c61ghmxel73o6" path="res://Scripts/tunnel.gd" id="1_4k2ek"]
 [ext_resource type="Texture2D" uid="uid://bqfm403pn5kfj" path="res://Sprites/New Piskel-1.png (3).png" id="1_7x5ue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k2ek"]
