@@ -771,7 +771,7 @@ attributes = SubResource("Resource_x6hpk")
 [node name="Tunnel" parent="objects that pause" unique_id=702496864 instance=ExtResource("11_0k7nw")]
 z_index = 1
 position = Vector2(1450, -940)
-Current_Scene = "res://Scenes/boss_scene.tscn"
+Current_Scene = "res://puzzle_scene.tscn"
 
 [node name="Interactable" parent="." unique_id=1780072424 instance=ExtResource("9_06phl")]
 position = Vector2(577, 187.00002)
