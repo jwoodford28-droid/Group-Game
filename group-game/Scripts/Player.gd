@@ -22,7 +22,7 @@ var attacking = false
 var stagger = false
 var push_strength: float = 50
 @export var arrows: int
-var push_strength: float = 100
+
 @export var sword_swish_sfx: AudioStream = preload("res://Sounds/Knife Swish.mp3.mp3")
 @export var sword_hit_flesh_sfx: AudioStream = preload("res://Sounds/Sword Hit Flesh.mp3.mp3")
 @export var example_sound: AudioStream = preload("res://Sounds/alex_jauk-slap-237622.mp3")
